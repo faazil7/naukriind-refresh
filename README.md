@@ -13,63 +13,43 @@ An automated Playwright-based bot that keeps your Naukri profile fresh and activ
 
 ---
 
-## Quick Start Guide
+## Quick Start Guide (Cloning & Running)
 
-### 1. Initial Login Setup (One-Time)
+If you have just cloned the repository from GitHub, follow these exact steps to run it on your local machine:
 
-Run the login command to open Chromium, enter your credentials, and handle any OTP/2FA verification:
+### 1. Prerequisites
+Ensure you have **Node.js** installed on your system.
 
+### 2. Clone and Install Dependencies
+```bash
+git clone <YOUR_REPOSITORY_URL>
+cd naukri-refresh
+npm install
+npx playwright install chromium
+```
+
+### 3. Authenticate (One-Time Login)
+Since browser session folders (`.naukri-session`) are gitignored for security, you need to log in once so the bot can save your session tokens locally:
 ```bash
 npm run login
 ```
-*or*
-```bash
-node index.js login
-```
+*A browser window will open. Log into your Naukri account manually (handling any OTP or CAPTCHA). Once you are successfully logged in and on your profile/dashboard, close the browser window.*
 
-Once logged in and redirected to your Naukri profile/dashboard, close the browser window. Your session cookies and login tokens are safely stored in `.naukri-session`.
+*(Alternatively, if you already have an existing `.naukri-session` folder from another setup, you can simply paste it directly into the project root directory to skip logging in).*
 
----
-
-### 2. Check Login Status
-
-Verify that your saved session is valid:
-
-```bash
-npm run status
-```
-
----
-
-### 3. Run a Single Profile Refresh
-
-To immediately refresh your profile once:
-
-```bash
-npm run refresh
-```
-
-If you want to view the browser performing the update:
-
-```bash
-node index.js refresh --headed
-```
-
----
-
-### 4. Run Scheduled Auto-Refresh
-
-Keep the bot running in the background to automatically refresh your profile every **60 minutes** (default):
-
-```bash
-npm run schedule
-```
-
-Custom interval (e.g., every 30 minutes):
-
-```bash
-node index.js schedule --interval 30
-```
+### 4. Run the Bot
+- **Test Refresh**:
+  ```bash
+  npm run refresh
+  ```
+- **Run Scheduled Auto-Refresh**:
+  ```bash
+  npm run schedule
+  ```
+- **Check Login Status**:
+  ```bash
+  npm run status
+  ```
 
 ---
 
