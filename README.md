@@ -105,17 +105,38 @@ If you prefer starting fresh:
 
 ---
 
-## Running Automated on GitHub Actions (Free Cloud Cron) ☁️
+## Automated Scheduling (Cron & PM2)
 
-You can run this bot completely for free in the cloud using **GitHub Actions**, which triggers your script on a schedule (e.g., every 6 hours) without keeping your laptop on.
+You can schedule the bot to run automatically in the background using either **Linux/macOS Cron** or **PM2 process manager**.
 
-### Setup Steps:
-1. Push your project repository to GitHub.
-2. In your GitHub repository, go to **Settings > Secrets and variables > Actions**.
-3. Add two repository secrets:
-   - `NAUKRI_EMAIL`: Your Naukri account email
-   - `NAUKRI_PASSWORD`: Your Naukri account password
-4. GitHub Actions will automatically detect the workflow configuration located at `.github/workflows/refresh.yml` and run your profile refresh automatically every **2 hours** (optimal balance for ranking & avoiding bot detection). Note that GitHub Secrets remain 100% private and encrypted even if your repository is public.
+### 1. Using Linux/macOS Cron (`crontab`)
+To run the refresh script automatically (e.g., every 2 hours):
+
+1. Open your crontab editor:
+   ```bash
+   crontab -e
+   ```
+2. Add the following cron entry (replace `/path/to/naukri-refresh` with your absolute project path and `node` with your absolute Node.js binary path if needed):
+   ```cron
+   0 */2 * * * cd /path/to/naukri-refresh && /usr/bin/node index.js refresh >> /path/to/naukri-refresh/logs/refresh.log 2>&1
+   ```
+3. Save and close the editor.
+
+### 2. Using PM2 (Persistent Background Process)
+If you prefer running a continuous background loop using built-in node scheduling:
+1. Install PM2 globally:
+   ```bash
+   npm install -g pm2
+   ```
+2. Start the scheduled script with PM2:
+   ```bash
+   pm2 start index.js --name "naukri-refresh" -- schedule
+   ```
+3. Save the PM2 process list so it restarts automatically on system reboots:
+   ```bash
+   pm2 startup
+   pm2 save
+   ```
 
 ---
 
