@@ -34,7 +34,9 @@ async function launchBrowser(options = {}) {
             '--hide-scrollbars',
             '--disable-http2',
             '--ignore-certificate-errors',
-            '--disable-web-security'
+            '--disable-web-security',
+            '--no-first-run',
+            '--no-default-browser-check'
         ]
     };
     
@@ -136,23 +138,12 @@ async function refreshProfile(options = {}) {
     const page = context.pages()[0] || await context.newPage();
 
     console.log('Navigating to Naukri Profile page...');
-    await page.goto(config.NAUKRI_PROFILE_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
-    await page.waitForTimeout(15000); // Increased wait time
+    await page.goto(config.NAUKRI_PROFILE_URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await page.waitForTimeout(3000); // Reduced wait time
     
-    // Scroll down progressively to ensure all sections load
-    for (let i = 0; i < 8; i++) {
-        await page.evaluate((y) => window.scrollTo(0, y), i * 600);
-        await page.waitForTimeout(1000);
-    }
-
-    // Debug: Log the URL we landed on
-    console.log('Current URL:', page.url());
-
-    // Scroll down progressively to ensure all sections load
-    for (let i = 0; i < 8; i++) {
-        await page.evaluate((y) => window.scrollTo(0, y), i * 600);
-        await page.waitForTimeout(1000);
-    }
+    // Scroll down once quickly to ensure lazy load
+    await page.evaluate(() => window.scrollTo(0, 400));
+    await page.waitForTimeout(1000);
     
     // Debug: Take a screenshot to see what the bot sees
     await page.screenshot({ path: 'profile-debug.png', fullPage: true }).catch(() => {});
@@ -222,73 +213,36 @@ async function refreshProfile(options = {}) {
     // Method: Target Resume Headline specifically
     console.log('Attempting to update Resume Headline specifically...');
     try {
-    // Add extra sleep to ensure page is fully loaded in headless
-    await page.waitForTimeout(60000); // 60 seconds to be safe
-    
-    // Scroll to Resume Headline area
-    await page.evaluate(() => {
-        window.scrollTo(0, document.body.scrollHeight);
-        window.scrollTo(0, 0);
-    });
-    await page.waitForTimeout(20000); // 20 seconds
+        await page.waitForTimeout(3000);
 
-        // Dump all edit buttons to console to see why they aren't matching
-        const allEdits = await page.evaluate(() => {
-            return Array.from(document.querySelectorAll('*'))
-                .filter(el => el.className && typeof el.className === 'string' && el.className.includes('edit'))
-                .map(el => ({
-                    tagName: el.tagName,
-                    text: el.textContent,
-                    className: el.className
-                }));
-        });
-        console.log('All potential edit buttons found:', allEdits);
-
-
-    let clicked = false;
-    
-    // Improved search: Identify the card by text, then find edit button inside it
-    const allCards = await page.evaluate(() => {
-        return Array.from(document.querySelectorAll('div'))
-            .filter(el => el.textContent && el.textContent.includes('Resume headline'))
-            .map(el => {
-                // Find all potential edit icons inside this card
-                const editButtons = Array.from(el.querySelectorAll('span, i, button, a'))
-                    .filter(btn => btn.className && typeof btn.className === 'string' && btn.className.includes('edit'));
-                return {
-                    tagName: el.tagName,
-                    className: el.className,
-                    editButtonCount: editButtons.length
-                };
-            });
-    });
-    console.log('Cards with "Resume headline" found:', allCards);
-    
-    // Click edit buttons found in cards
-    const editButtonsGlobal = page.locator('span[class*="edit"], i[class*="edit"], button[class*="edit"], .edit');
-    console.log('Total global edit buttons found:', await editButtonsGlobal.count());
-    
-    // Fallback if cards not found
-    console.log('Trying global search...');
-    for (let i = 0; i < await editButtonsGlobal.count(); i++) {
-        const btn = editButtonsGlobal.nth(i);
-        const box = await btn.boundingBox();
-        console.log('Attempting to click edit button', i, 'at', box);
+        let clicked = false;
         
-        // Try clicking and check if a textarea appears
-        await btn.click({force: true}).catch(() => {});
-        await page.waitForTimeout(2000); // Wait for modal
-        const textarea = await page.$('textarea#resumeHeadlineTxt, textarea[id*="Headline"], textarea');
-        if (textarea) {
+        // Direct targeted locator for Resume Headline edit icon
+        const headlineEditBtn = page.locator('.resumeHeadline span.edit, .resumeHeadline .edit, div.resumeHeadline .icon.edit').first();
+        if (await headlineEditBtn.count() > 0) {
+            console.log('Found Resume Headline edit button directly. Clicking...');
+            await headlineEditBtn.click({ force: true });
             clicked = true;
-            break;
         } else {
-            // Close modal if it opened something else
-            const closeBtn = await page.$('.crossIcon, .close-icon, button:has-text("Cancel")');
-            if (closeBtn) await closeBtn.click().catch(() => {});
-            await page.waitForTimeout(1000);
+            // Fallback to searching card containing "Resume headline"
+            const editButtonsGlobal = page.locator('span[class*="edit"], i[class*="edit"], button[class*="edit"], .edit');
+            console.log('Total global edit buttons found:', await editButtonsGlobal.count());
+            
+            for (let i = 0; i < Math.min(await editButtonsGlobal.count(), 5); i++) {
+                const btn = editButtonsGlobal.nth(i);
+                await btn.click({force: true}).catch(() => {});
+                await page.waitForTimeout(1500);
+                const textarea = await page.$('textarea#resumeHeadlineTxt, textarea[id*="Headline"], textarea');
+                if (textarea) {
+                    clicked = true;
+                    break;
+                } else {
+                    const closeBtn = await page.$('.crossIcon, .close-icon, button:has-text("Cancel")');
+                    if (closeBtn) await closeBtn.click().catch(() => {});
+                    await page.waitForTimeout(500);
+                }
+            }
         }
-    }
 
 
 
@@ -300,9 +254,11 @@ async function refreshProfile(options = {}) {
           let text = await textarea.inputValue();
           text = text.trim();
           
+          let actionType = text.endsWith('.') ? 'REMOVING period (.)' : 'ADDING period (.)';
           let newText = text.endsWith('.') ? text.slice(0, -1) : text + '.';
           
           console.log(`==================================================`);
+          console.log(`[UPDATE ACTION] ${actionType}`);
           console.log(`[UPDATE] Resume Headline Sentence Updated:`);
           console.log(`  Before: "${text}"`);
           console.log(`  After:  "${newText}"`);

@@ -1,0 +1,140 @@
+[2026-11-23T04:33:36Z] Logs directory initialized.
+[2026-11-23T10:21:07Z] Starting scheduled headed refresh...
+node:internal/modules/cjs/loader:1607
+  throw err;
+  ^
+System.Management.Automation.RemoteException
+Error: Cannot find module 'C:\WINDOWS\system32\index.js'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1603:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1145:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1169:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1196:12)
+    at Module._load (node:internal/modules/cjs/loader:1370:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+    at node:internal/main/run_main_module:33:47 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+System.Management.Automation.RemoteException
+Node.js v26.12.1
+[2026-11-23T10:21:07Z] Refresh completed successfully.
+[2026-11-23T10:21:54Z] Starting scheduled headed refresh...
+[2026-11-23T10:22:09Z] Starting scheduled headed refresh...
+? injected env (0) from .env
+Running one-time Naukri profile refresh...
+[23/11/2026, 10:22:10 am] Starting Naukri Profile Refresh (Headless: false)...
+Error during profile refresh: browserType.launchPersistentContext: Opening in existing browser session. This usually means that the profile is already in use by another instance of Chromium.
+Call log:
+[2m  - <launching> C:\Users\Asus-2025\AppData\Local\ms-playwright\chromium-1254\chrome-win64\chrome.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-component-update --no-default-browser-check --disable-dev-shm-usage --disable-edgeupdater --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,HttpsUpgrades,HttpsFirstBalancedModeAutoEnable,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,AvoidCorsURLLoaderRestartOnRedirect,TcpPortRandomizationWin,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,PreconnectToSearch,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface,SkipListAccountsWithoutGaiaCookies --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --enable-unsafe-swiftshader --edge-skip-compat-layer-relaunch --disable-stack-profiler --disable-infobars --disable-sync --do-not-de-elevate --no-sandbox --disable-blink-features=AutomationControlled,AutomationControlled --no-sandbox --disable-setuid-sandbox --window-size=1280,800 --disable-infobars --disable-notifications --mute-audio --disable-gpu --disable-dev-shm-usage --hide-scrollbars --disable-http2 --ignore-certificate-errors --disable-web-security --user-data-dir=D:\experiments\naukri-refresh\.naukri-session --remote-debugging-pipe about:blank[22m
+[2m  - <launched> pid=18016[22m
+[2m  - [pid=18016][out] Opening in existing browser session.[22m
+[2m  - [pid=18016] <gracefully close start>[22m
+[2m  - [pid=18016] <kill>[22m
+[2m  - [pid=18016] <will force kill>[22m
+[2m  - [pid=18016] <process did exit: exitCode=0, signal=null>[22m
+[2m  - [pid=18016] starting temporary directories cleanup[22m
+[2m  - [pid=18016] finished temporary directories cleanup[22m
+[2m  - [pid=18016] <gracefully close end>[22m
+System.Management.Automation.RemoteException
+
+[RESULT] Profile refresh failed: browserType.launchPersistentContext: Opening in existing browser session. This usually means that the profile is already in use by another instance of Chromium.
+Call log:
+[2m  - <launching> C:\Users\Asus-2025\AppData\Local\ms-playwright\chromium-1254\chrome-win64\chrome.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-component-update --no-default-browser-check --disable-dev-shm-usage --disable-edgeupdater --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,HttpsUpgrades,HttpsFirstBalancedModeAutoEnable,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,AvoidCorsURLLoaderRestartOnRedirect,TcpPortRandomizationWin,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,PreconnectToSearch,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface,SkipListAccountsWithoutGaiaCookies --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --enable-unsafe-swiftshader --edge-skip-compat-layer-relaunch --disable-stack-profiler --disable-infobars --disable-sync --do-not-de-elevate --no-sandbox --disable-blink-features=AutomationControlled,AutomationControlled --no-sandbox --disable-setuid-sandbox --window-size=1280,800 --disable-infobars --disable-notifications --mute-audio --disable-gpu --disable-dev-shm-usage --hide-scrollbars --disable-http2 --ignore-certificate-errors --disable-web-security --user-data-dir=D:\experiments\naukri-refresh\.naukri-session --remote-debugging-pipe about:blank[22m
+[2m  - <launched> pid=18016[22m
+[2m  - [pid=18016][out] Opening in existing browser session.[22m
+[2m  - [pid=18016] <gracefully close start>[22m
+[2m  - [pid=18016] <kill>[22m
+[2m  - [pid=18016] <will force kill>[22m
+[2m  - [pid=18016] <process did exit: exitCode=0, signal=null>[22m
+[2m  - [pid=18016] starting temporary directories cleanup[22m
+[2m  - [pid=18016] finished temporary directories cleanup[22m
+[2m  - [pid=18016] <gracefully close end>[22m
+
+[2026-11-23T10:22:10Z] Refresh completed successfully.
+Gùç injected env (0) from .env
+Running one-time Naukri profile refresh...
+[23/11/2026, 10:21:55 am] Starting Naukri Profile Refresh (Headless: false)...
+Navigating to Naukri Profile page...
+Current URL: https://www.naukri.com/mnjuser/profile
+Screenshot taken to debug page load.
+Detected ALL elements with "edit" in class name count: 22
+Attempting to update Resume Headline specifically...
+Resume Headline update failed: page.waitForTimeout: Target page, context or browser has been closed
+ERROR: Could not find edit triggers for profile refresh.
+
+[RESULT] Profile refresh failed: EDIT_ELEMENT_NOT_FOUND
+[2026-11-23T10:23:00Z] Refresh completed successfully.
+[2026-11-23T10:23:05Z] Starting scheduled headed refresh...
+[2026-11-23T10:26:04Z] Starting scheduled refresh...
+Gùç injected env (0) from .env
+Running one-time Naukri profile refresh...
+[23/11/2026, 10:26:05 am] Starting Naukri Profile Refresh (Headless: true)...
+Navigating to Naukri Profile page...
+Current URL: https://www.naukri.com/mnjuser/profile
+Screenshot taken to debug page load.
+Detected ALL elements with "edit" in class name count: 0
+Attempting to update Resume Headline specifically...
+All potential edit buttons found: []
+Cards with "Resume headline" found: []
+Total global edit buttons found: 0
+Trying global search...
+Could not locate Resume Headline edit button.
+ERROR: Could not find edit triggers for profile refresh.
+
+[RESULT] Profile refresh failed: EDIT_ELEMENT_NOT_FOUND
+[2026-11-23T10:28:01Z] Refresh completed successfully.
+[2026-11-23T11:00:12Z] Starting scheduled refresh...
+? injected env (0) from .env
+Running one-time Naukri profile refresh...
+[23/11/2026, 11:00:12 am] Starting Naukri Profile Refresh (Headless: true)...
+Navigating to Naukri Profile page...
+Current URL: https://www.naukri.com/mnjuser/profile
+Screenshot taken to debug page load.
+Detected ALL elements with "edit" in class name count: 0
+Attempting to update Resume Headline specifically...
+All potential edit buttons found: []
+Cards with "Resume headline" found: []
+Total global edit buttons found: 0
+Trying global search...
+Could not locate Resume Headline edit button.
+ERROR: Could not find edit triggers for profile refresh.
+
+[RESULT] Profile refresh failed: EDIT_ELEMENT_NOT_FOUND
+[2026-11-23T11:02:07Z] Refresh completed successfully.
+[2026-11-23T11:25:03Z] Starting scheduled refresh...
+Gùç injected env (0) from .env
+Running one-time Naukri profile refresh...
+[23/11/2026, 11:25:03 am] Starting Naukri Profile Refresh (Headless: true)...
+Navigating to Naukri Profile page...
+Current URL: https://www.naukri.com/mnjuser/profile
+Screenshot taken to debug page load.
+Detected ALL elements with "edit" in class name count: 0
+Attempting to update Resume Headline specifically...
+All potential edit buttons found: []
+Cards with "Resume headline" found: []
+Total global edit buttons found: 0
+Trying global search...
+Could not locate Resume Headline edit button.
+ERROR: Could not find edit triggers for profile refresh.
+
+[RESULT] Profile refresh failed: EDIT_ELEMENT_NOT_FOUND
+[2026-11-23T11:26:58Z] Refresh completed successfully.
+[2026-11-23T11:40:35Z] Starting scheduled refresh...
+Gùç injected env (0) from .env
+Running one-time Naukri profile refresh...
+[23/11/2026, 11:40:35 am] Starting Naukri Profile Refresh (Headless: true)...
+Navigating to Naukri Profile page...
+Current URL: https://www.naukri.com/mnjuser/profile
+Screenshot taken to debug page load.
+Detected ALL elements with "edit" in class name count: 0
+Attempting to update Resume Headline specifically...
+All potential edit buttons found: []
+Cards with "Resume headline" found: []
+Total global edit buttons found: 0
+Trying global search...
+Could not locate Resume Headline edit button.
+ERROR: Could not find edit triggers for profile refresh.
+
+[RESULT] Profile refresh failed: EDIT_ELEMENT_NOT_FOUND
+[2026-11-23T11:42:30Z] Refresh completed successfully.

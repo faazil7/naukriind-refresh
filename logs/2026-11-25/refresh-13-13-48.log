@@ -1,0 +1,19 @@
+[2026-11-25T13:13:49Z] Starting scheduled refresh...
+Gùç injected env (0) from .env
+Running one-time Naukri profile refresh...
+[25/11/2026, 1:13:52 pm] Starting Naukri Profile Refresh (Headless: false)...
+Navigating to Naukri Profile page...
+Screenshot taken to debug page load.
+Detected ALL elements with "edit" in class name count: 10
+Attempting to update Resume Headline specifically...
+Found Resume Headline edit button directly. Clicking...
+==================================================
+[UPDATE ACTION] REMOVING period (.)
+[UPDATE] Resume Headline Sentence Updated:
+  Before: "8+ years of experience in Data Engineering with expertise in Pyspark, Hadoop, Python, SQL, Microsoft Fabric, Azure and Google Cloud."
+  After:  "8+ years of experience in Data Engineering with expertise in Pyspark, Hadoop, Python, SQL, Microsoft Fabric, Azure and Google Cloud"
+==================================================
+SUCCESS: Resume Headline updated and saved successfully!
+
+[RESULT] Profile refresh completed successfully!
+[2026-11-25T13:14:07Z] Refresh completed successfully.
