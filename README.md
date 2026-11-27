@@ -6,10 +6,10 @@ An automated Playwright-based bot that keeps your Naukri profile fresh and activ
 
 ## Features
 
-- 🔐 **Persistent Browser Sessions**: Log in once interactively (handles 2FA/OTP/Captcha seamlessly); browser context is saved locally in `.naukri-session`.
+- 🔐 **Persistent Browser Sessions**: Log in once interactively (handles 2FA/OTP/Captcha seamlessly); browser context is saved locally in `.naukri-session` and `.naukri-india-session`.
 - 🔄 **Smart Profile Refresh**: Toggles trailing period on Resume Headline or re-saves Profile Summary to bump the profile timestamp.
 - ⏱️ **Scheduled Execution**: Run automatically on a customizable interval (e.g., every 30 or 60 minutes).
-- 👁️ **Headless & Headed Modes**: Run silently in headless mode or pass `--headed` to inspect the browser automation.
+- 🇮🇳 **Multi-Region Support**: Supports both global Naukri and Naukri India (`india:refresh`).
 
 ---
 
